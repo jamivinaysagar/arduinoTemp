@@ -1,0 +1,62 @@
+Mika.saari@tut.fi
+16. Sep. 2015
+}
+void loop()
+{
+ dot(); dot(); dot();
+ dash(); dash(); dash();
+ dot(); dot(); dot();
+ delay(3000);
+}
+void dot()
+{
+ digitalWrite(pin, HIGH);
+ delay(250);
+ digitalWrite(pin, LOW);
+ delay(250);
+}
+void dash()
+{
+ digitalWrite(pin, HIGH);
+ delay(1000);
+ digitalWrite(pin, LOW);
+ delay(250);
+}
+Toteutus – 2. Vaihe
+Toteutetaan edellinen sovellus käyttäen luokkaa Morse, siten että dash() ja dot() -funktiot sijoitetaan
+edellä mainittuun luokkaan.
+•
+Luo hakemisto 
+Morse
+ hakemistoon arduino/libraries/
+•
+Luo Morse -hakemistoon tiedosto 
+Morse.h
+, joka on luokan toiminnot määrittelevä 
+otsikkotiedosto, eli header.
+•
+ Luo Morse -hakemistoon toinen tiedosto 
+Morse.cpp
+, joka toteuttaa otsikkotiedoston 
+määrittelemät ominaisuudet. 
+•
+Kun tiedostot on luotu, niin Arduino-työkalusta valitaan Sketch/ Import Library... / Add 
+Library , jolla valitaa edellä luotu Morse-hakemisto. Valinnan jälkeen Morse näkyy Sketch / 
+Import Library / -valikon alimmaisena. 
+•
+Alla Tiedostojen koodit:
+//Morse.h
+#ifndef Morse_h
+#define Morse_h
+
+#include "Arduino.h"
+class Morse
+{
+ public:
+ Morse(int pin);
+ void dot();
+ void dash();
+ private:
+ int _pin;
+};
+#endif
