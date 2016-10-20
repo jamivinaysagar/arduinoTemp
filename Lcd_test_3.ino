@@ -23,7 +23,21 @@ void setup() {
   Serial.begin(9600);
  
 }
+// clean LCD
+char cleanUp(){
+  lcd.setCursor(0,0);
+  lcd.print("                ");
+  lcd.setCursor(0,1);
+  lcd.print("                "); 
+}
+
+//writes two rows of text: 16 character and 16 character
 char readSerialData() {
+  //cleaning ldc only if there is input
+  if(Serial.available() > 0){
+    cleanUp();
+  }
+  
   while (Serial.available() > 0) // waiting input
   {
     inChar = Serial.read(); // Read a character
@@ -46,10 +60,12 @@ char readSerialData() {
       break;
     }
   }
+  
   //The first row printing
   lcd.setCursor(0,0);
   lcd.print(inData);
-  delay(500);
+  //this do something
+  //delay(500);
   //The second row printing
   lcd.setCursor(0,1);
   lcd.print(inData2);
