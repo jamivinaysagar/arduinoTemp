@@ -1,10 +1,8 @@
 //miksa007
 //20.10.2016
-//This program takes 16 character long input from serial monitor and put it to lcds first row
-//TODO use second row also
+//This program takes characters input from serial monitor and put those to the lcds first row
 //TODO ...
 
-// include the library code:
 #include <LiquidCrystal.h>
 
 // initialize the library with the numbers of the interface pins
@@ -23,6 +21,7 @@ void setup() {
   Serial.begin(9600);
  
 }
+
 // clean LCD
 char cleanUp(){
   lcd.setCursor(0,0);
@@ -37,20 +36,17 @@ char readSerialData() {
   if(Serial.available() > 0){
     cleanUp();
   }
-  
   while (Serial.available() > 0) // waiting input
   {
     inChar = Serial.read(); // Read a character
     //first row
     if(index < 16) // One less than the size of the array
     {
-      
       inData[index] = inChar; // Store it
       index++; // Increment where to write next
       inData[index] = '\0'; // Null terminate the string
     }else if(index>15 &&index<32){
       //second row
-      //inChar = Serial.read(); // Read a character
       inData2[index-16] = inChar; // Store it
       index++; // Increment where to write next
       inData2[index-16] = '\0'; // Null terminate the string
@@ -64,8 +60,6 @@ char readSerialData() {
   //The first row printing
   lcd.setCursor(0,0);
   lcd.print(inData);
-  //this do something
-  //delay(500);
   //The second row printing
   lcd.setCursor(0,1);
   lcd.print(inData2);
@@ -80,7 +74,7 @@ char readSerialData() {
 }
 
 void loop() {
-  //all the work is done in Comp()-function
+  //all the work is done in readSerialData()-function
   readSerialData();
   delay(500);
 }
