@@ -12,6 +12,7 @@ LiquidCrystal lcd(8, 9, 4, 5, 6, 7);
 int x=0;
 
 char inData[17]; // Allocate some space for the string
+char inData2[17];
 char inChar=-1; // Where to store the character read
 byte index = 0; // Index into array; where to store the character
 
@@ -25,25 +26,41 @@ void setup() {
 char readSerialData() {
   while (Serial.available() > 0) // waiting input
   {
+    inChar = Serial.read(); // Read a character
+    //first row
     if(index < 16) // One less than the size of the array
     {
-      inChar = Serial.read(); // Read a character
+      
       inData[index] = inChar; // Store it
       index++; // Increment where to write next
       inData[index] = '\0'; // Null terminate the string
-    }else{
+    }else if(index>15 &&index<32){
+      //second row
+      //inChar = Serial.read(); // Read a character
+      inData2[index-16] = inChar; // Store it
+      index++; // Increment where to write next
+      inData2[index-16] = '\0'; // Null terminate the string
+    }
+    else{
       //if message is too long
       break;
     }
   }
-  
+  //The first row printing
   lcd.setCursor(0,0);
-  index=0;
   lcd.print(inData);
+  delay(500);
+  //The second row printing
+  lcd.setCursor(0,1);
+  lcd.print(inData2);
+  index=0;
   //emptying string, but this is not the best choice
   for (int i=0;i<16;i++) {
     inData[i]=0;
-    }
+  }
+  for (int i=0;i<16;i++) {
+    inData2[i]=0;
+  }
 }
 
 void loop() {
