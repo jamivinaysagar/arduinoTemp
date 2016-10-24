@@ -1,6 +1,15 @@
 #miksa
 #date 24.10.2016
 # tested py Python 3.5.2
+
+#This was the hardest thing
+#This software reads a value as a byte array from serialport and converts it first to the string value.
+#Then the string value are converted to float value.
+#and the float value are written to the firebase with timestamp.
+
+
+
+#TODO the first value is too big, something like 8000 degrees
 import serial
 import time
 import requests
