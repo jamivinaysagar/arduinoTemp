@@ -2,12 +2,9 @@
 #date 24.10.2016
 # tested py Python 3.5.2
 
-#This was the hardest thing
 #This software reads a value as a byte array from serialport and converts it first to the string value.
 #Then the string value are converted to float value.
 #and the float value are written to the firebase with timestamp.
-
-
 
 #TODO the first value is too big, something like 8000 degrees
 import serial
@@ -25,9 +22,9 @@ def isfloat(value):
   except:
     return False
   
-firebase_url = 'https://miksanprojekti.firebaseio.com/'
+firebase_url = 'https://***********************.firebaseio.com/'
 #Connect to Serial Port for communication
-ser = serial.Serial('/dev/portti', 9600, timeout=0)
+ser = serial.Serial('/dev/ttyACM0', 9600, timeout=0)
 #Setup a loop to send Temperature values at fixed intervals
 #in seconds
 fixed_interval = 5
